@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assistente PopCard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="build/botui.min.css">
+  <link rel="stylesheet" href="build/botui-theme-default.css">
+</head>
+<body>
+  <div class="botui-app-container" id="home-demo">
+    <bot-ui></bot-ui>
+  </div>
+  <script src="https://cdn.jsdelivr.net/vue/2.0.5/vue.min.js"></script>
+  <script src="build/botui.js"></script>
+  <script>
+
+
+   var homeBot = BotUI('home-demo');
+
+homeBot.message.add({
+      delay: 1500,
+    loading: true,
+  content: '<b>🎉 Parabéns João Luiz!</b> '
+
+}).then(function () {
+  return homeBot.message.add({
+    delay: 1500,
+    loading: true,
+    content: 'Você Concluio Nosso Primeiro Nivel !'
+  });
+}).then(function () {
+  return homeBot.message.add({
+    delay: 1500,
+    loading: true,
+    content: 'Esse e um grande Passo para sua saúde Financeira?'
+  });
+}).then(function () {
+  return homeBot.message.add({
+    delay: 1500,
+    loading: true,
+    content: 'Agora que você conseguiu concluir Nossa meta de Poupar <b>R$ 1200,00</b> entre esses doze Meses..'
+  });
+}).then(function () {
+  return homeBot.message.add({
+    delay: 1500,
+    loading: true,
+    content: 'e conseguiu Restabelecer seu Credito no Mercado'
+  });
+}).then(function () {
+  return homeBot.message.add({
+    delay: 1500,
+    loading: true,
+    content: 'Podemos Iniciar e  ajudar você a entrar em  Nosso Proximo Nivel'
+  });
+}).then(function () {
+  return homeBot.message.add({
+    delay: 1500,
+    loading: true,
+    content: '<b>VAMOS COMEÇAR!!!</b>'
+  });
+}).then(function () {
+  return homeBot.action.button({
+    delay: 1000,
+    action: [{
+      text: 'SIM 😀',
+      value: 'sim'
+    }, {
+      text: 'não 😒',
+      value: 'nao'
+    }]
+  });
+}).then(function (res) {
+  //ga_record('btn_click', res.value);
+  if(res.value == 'sim') {
+    //console.log('ok');
+    tutorial();
+  }
+  if(res.value == 'skip') {
+    end();
+  }
+});
+
+var tutorial = function () {
+  homeBot.message.add({
+    delay: 1000,
+    content: "Nesse Nivel Vamos Trabalha com Investimentos."
+  }).then(function () {
+    return homeBot.message.add({
+      delay: 1000,
+      content: 'Quando surge o assunto investimentos, qual é o seu primeiro pensamento?'
+    });
+  }).then(function () {
+  return homeBot.action.button({
+    delay: 1000,
+    action: [{
+      text: 'Gosto Disso 😀',
+      value: 'sim2'
+    }, {
+      text: 'Não curto 😒',
+      value: 'nao2'
+    }]
+  });
+}).then(function () {
+    return homeBot.message.bot({
+      delay: 1400,
+      content: 'Muito bem! Eu estou aqui para te ajudar a investir em objetivos de investimento, que você mesmo vai criar com a minha ajuda. Você vai ver como isso tudo pode ser simples. Já são milhares de pessoas que investem nos seus objetivos comigo, então não se preocupe. É seguro 🔒.'
+    });
+  }).then(function (res) {
+    return homeBot.message.bot({
+      delay: 500,
+      content: 'Então, a primeira coisa a fazer é identificar o seu perfil como investidor. Para isso, vou fazer algumas perguntas básicas, ok?'
+    });
+  }).then(function (res) {
+    return homeBot.message.bot({
+      delay: 1400,
+      content: 'E com relação a investir seu dinheiro, o que é mais importante para você?'
+    });
+  }).then(function (res) {
+    return homeBot.action.button({
+    delay: 1000,
+    action: [{
+      text: 'Arriscar Tudo',
+      value: 'sim3'
+    }, {
+      text: 'Não quero perde nunca ',
+      value: 'nao3'
+    }]
+  });
+  }).then(function (res) {
+    return homeBot.message.bot({
+      delay: 2500,
+      content: 'Ok. Já tenho algumas sugestões em mente… '
+    });
+  }).then(function (res) {
+    return homeBot.message.bot({
+      delay: 1000,
+      content: 'Vamos lá...'
+    });
+  }).then(end);
+};
+
+var end = function () {
+  ga_record('message', 'end');
+  homeBot.message.add({
+    delay: 1000,
+    content: '!(book) [Read the docs](https:///docs.botui.org), see [examples](https:///examples.botui.org) or explore the code on !(github) [GitHub](https://github.com/moinism/botui)'
+  });
+};
+
+var ga_record = function(type, action) {
+  if(ga) {
+    ga('send', {
+      hitType: 'event',
+      eventCategory: type,
+      eventAction: action
+    });
+  }
+};
+
+
+  </script>
+
+</body>
+</html>
